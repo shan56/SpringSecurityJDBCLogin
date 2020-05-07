@@ -17,19 +17,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/h2-console/**")
-                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll();
+
+        /* FOR ACCESS TO H2 FOR DEBUGGING
         httpSecurity.csrf()
                 .ignoringAntMatchers("/h2-console/**");
         httpSecurity.headers()
                 .frameOptions()
                 .sameOrigin();
+
+         */
+
     }
 
     @Autowired
